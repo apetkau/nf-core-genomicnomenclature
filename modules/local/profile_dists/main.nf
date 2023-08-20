@@ -4,8 +4,8 @@ process PROFILE_DISTS {
     container 'docker.io/apetkau/profile_dists:latest'
 
     input:
-    path(query_profile)
-    path(reference_profile)
+    path(query_profile, stageAs: "query_profile")
+    path(reference_profile, stageAs: "reference_profile")
 
     output:
     path ("results/allele_map.json")   , emit: allele_map_json
