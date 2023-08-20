@@ -303,7 +303,11 @@
     "properties": {
         "samples_profile": {
             "type": "string",
-            "default": null
+            "default": "None"
+        },
+        "mcluster_thresholds": {
+            "type": "string",
+            "default": "10,5,0"
         }
     }
 }
