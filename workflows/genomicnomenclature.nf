@@ -85,7 +85,8 @@ workflow GENOMICNOMENCLATURE {
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
 
     PROFILE_DISTS (
-        file(params.samples_profile)
+        query_profile=file(params.samples_profile),
+        reference_profile=file(params.samples_profile)
     )
     ch_versions = ch_versions.mix(PROFILE_DISTS.out.versions.first())
 
