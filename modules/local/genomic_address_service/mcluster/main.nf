@@ -1,12 +1,11 @@
 process GENOMIC_ADDRESS_SERVICE_MCLUSTER {
-    label 'process_single'
+    label 'process_low'
 
     container 'docker.io/apetkau/genomic_address_service:latest'
 
     input:
     path(distance_matrix)
     val(thresholds)
-    val(method)
 
     output:
     path("results/clusters.text")  , emit: clusters_text

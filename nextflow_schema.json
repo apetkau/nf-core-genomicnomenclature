@@ -308,6 +308,10 @@
         "mcluster_thresholds": {
             "type": "string",
             "default": "10,5,0"
+        },
+        "mcluster_method": {
+            "type": "string",
+            "default": "average"
         }
     }
 }

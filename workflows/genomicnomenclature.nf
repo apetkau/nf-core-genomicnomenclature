@@ -93,7 +93,6 @@ workflow GENOMICNOMENCLATURE {
     GENOMIC_ADDRESS_SERVICE_MCLUSTER (
         PROFILE_DISTS.out.results_text,
         thresholds="${params.mcluster_thresholds}",
-        method="average"
     )
     ch_versions = ch_versions.mix(GENOMIC_ADDRESS_SERVICE_MCLUSTER.out.versions.first())
 
