@@ -31,7 +31,7 @@ process GENOMIC_ADDRESS_SERVICE_MCLUSTER {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-       gas_mcluster : \$(echo \$(gas mcluster --version 2>&1) | sed 's/^.*gas //' )
+        gas_mcluster : \$(echo \$(gas mcluster --version 2>&1) | sed 's/^.*gas //' )
     END_VERSIONS
     """
 }
