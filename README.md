@@ -5,15 +5,20 @@ This pipeline is an example for genomic nomenclature (using <https://github.com/
 If you have Nextflow and Docker installed, you can test it out with:
 
 ```bash
-nextflow run https://github.com/apetkau/nf-core-genomicnomenclature -profile docker,test -r dev --outdir results
+nextflow run apetkau/nf-core-genomicnomenclature -profile docker,test -r dev -latest --outdir results
 ```
 
 Or, if you wish to use your own data:
 
 ```bash
-nextflow run https://github.com/apetkau/nf-core-genomicnomenclature -r dev -profile docker --samples_profile allele_profiles.tsv --outdir results --input 'https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
+nextflow run apetkau/nf-core-genomicnomenclature -r dev -latest -profile docker --input profilesheet.csv --outdir results
 ```
 
-Note, that the parameter of `--input` is not used right now now, but is only there until this is fixed to be used to pass the actual input data using this parameter.
+Here, the `profilesheet.csv` lists the cg/wgMLST profiles to cluster/generate nomenclature. The format is a CSV file that contains the columns: `id`, `profiles_format`, `allele_profiles`. An example is below (or refer to the test [profilesheet.csv](test_data/profilesheet.csv)).
 
-Output for genomic address mcluster will be in `results/genomic/results`.
+**profilesheet.csv**:
+
+| id | profiles_format | allele_profiles |
+| test | tsv | allele_profiles.tsv |
+
+Output for genomic address mcluster will be in `results/genomic/{id}_results`, which contains the output of `gas mcluster` as described at <https://github.com/phac-nml/genomic_address_service>.

@@ -1,2 +1,2 @@
 id,profiles_format,allele_profiles
-test,csv,https://raw.githubusercontent.com/apetkau/nf-core-genomicnomenclature/dev/test_data/reference_profiles.tsv
+test,tsv,https://raw.githubusercontent.com/apetkau/nf-core-genomicnomenclature/dev/test_data/reference_profiles.tsv
