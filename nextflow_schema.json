@@ -299,5 +299,11 @@
         {
             "$ref": "#/definitions/generic_options"
         }
-    ]
+    ],
+    "properties": {
+        "samples_profile": {
+            "type": "string",
+            "default": null
+        }
+    }
 }
