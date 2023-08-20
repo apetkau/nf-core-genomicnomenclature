@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "$id": "https://raw.githubusercontent.com/nf-core/genomicnomenclature/master/nextflow_schema.json",
     "title": "nf-core/genomicnomenclature pipeline parameters",
-    "description": "Query cg/wgMLST profiles",
+    "description": "Generate genomic nomenclature",
     "type": "object",
     "definitions": {
         "input_output_options": {
