@@ -1,5 +1,6 @@
 process PROFILE_DISTS {
-    label 'process_single'
+    tag "${meta.id}"
+    label 'process_low'
 
     container 'docker.io/apetkau/profile_dists:latest'
 
@@ -7,11 +8,11 @@ process PROFILE_DISTS {
     tuple val(meta), path(allele_profiles)
 
     output:
-    path ("*_results/allele_map.json")   , emit: allele_map_json
-    path ("*_results/query_profile.text"), emit: query_profile_text
-    path ("*_results/ref_profile.text")  , emit: ref_profile_text
-    path ("*_results/results.text")      , emit: results_text
-    path "versions.yml"                  , emit: versions
+    tuple val(meta), path ("*_results/allele_map.json")   , emit: allele_map_json
+    tuple val(meta), path ("*_results/query_profile.text"), emit: query_profile_text
+    tuple val(meta), path ("*_results/ref_profile.text")  , emit: ref_profile_text
+    tuple val(meta), path ("*_results/results.text")      , emit: distance_matrix
+    path "versions.yml"                                   , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
