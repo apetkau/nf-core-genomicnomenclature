@@ -4,30 +4,29 @@ process PROFILE_DISTS {
     container 'docker.io/apetkau/profile_dists:latest'
 
     input:
-    path(query_profile, stageAs: "query_profile")
-    path(reference_profile, stageAs: "reference_profile")
+    tuple val(meta), path(allele_profiles)
 
     output:
-    path ("results/allele_map.json")   , emit: allele_map_json
-    path ("results/query_profile.text"), emit: query_profile_text
-    path ("results/ref_profile.text")  , emit: ref_profile_text
-    path ("results/results.text")      , emit: results_text
-    path "versions.yml"                , emit: versions
+    path ("*_results/allele_map.json")   , emit: allele_map_json
+    path ("*_results/query_profile.text"), emit: query_profile_text
+    path ("*_results/ref_profile.text")  , emit: ref_profile_text
+    path ("*_results/results.text")      , emit: results_text
+    path "versions.yml"                  , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
     def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix
+    def prefix = task.ext.prefix ?: "${meta.id}"
     """
     profile_dists \\
-        --query $query_profile \\
-        --ref $reference_profile \\
+        --query $allele_profiles \\
+        --ref $allele_profiles \\
         $args \\
         --force \\
         --cpus $task.cpus \\
-        --outdir results
+        --outdir "${prefix}_results"
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

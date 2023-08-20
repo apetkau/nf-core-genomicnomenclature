@@ -1,28 +1,30 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/nf-core/genomicnomenclature/master/assets/schema_input.json",
+    "$id": "https://raw.githubusercontent.com/apetkau/nf-core-genomicnomenclature/main/assets/schema_input.json",
     "title": "nf-core/genomicnomenclature pipeline - params.input schema",
     "description": "Schema for the file provided with params.input",
     "type": "array",
     "items": {
         "type": "object",
         "properties": {
-            "sample": {
+            "id": {
                 "type": "string",
                 "pattern": "^\\S+$",
-                "errorMessage": "Sample name must be provided and cannot contain spaces"
+                "meta": ["id"],
+                "errorMessage": "Identifier for the allele profiles."
             },
-            "fastq_1": {
+            "profiles_format": {
                 "type": "string",
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "enum": ["csv", "parquet"],
+		"meta": ["profiles_format"],
+                "errorMessage": "Provided profiles_format is not valid"
             },
-            "fastq_2": {
-                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'",
+            "allele_profiles": {
+                "errorMessage": "Provided allele_profiles file is not valid",
                 "anyOf": [
                     {
                         "type": "string",
-                        "pattern": "^\\S+\\.f(ast)?q\\.gz$"
+                        "pattern": "^\\S+$"
                     },
                     {
                         "type": "string",
@@ -31,6 +33,6 @@
                 ]
             }
         },
-        "required": ["sample", "fastq_1"]
+        "required": ["id", "profiles_format", "allele_profiles"]
     }
 }

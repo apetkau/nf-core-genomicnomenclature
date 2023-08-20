@@ -60,10 +60,10 @@ workflow GENOMICNOMENCLATURE {
     //
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
     //
-    INPUT_CHECK (
-        file(params.input)
-    )
-    ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
+    //INPUT_CHECK (
+    //    file(params.input)
+    //)
+    //ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
     // TODO: OPTIONAL, you can use nf-validation plugin to create an input channel from the samplesheet with Channel.fromSamplesheet("input")
     // See the documentation https://nextflow-io.github.io/nf-validation/samplesheets/fromSamplesheet/
     // ! There is currently no tooling to help you write a sample sheet schema
@@ -71,8 +71,7 @@ workflow GENOMICNOMENCLATURE {
     ch_input.view()
 
     PROFILE_DISTS (
-        query_profile=file(params.samples_profile),
-        reference_profile=file(params.samples_profile)
+        ch_input
     )
     ch_versions = ch_versions.mix(PROFILE_DISTS.out.versions)
 
