@@ -15,7 +15,7 @@
             },
             "profiles_format": {
                 "type": "string",
-                "enum": ["csv", "parquet"],
+                "enum": ["tsv", "csv", "parquet"],
                 "meta": ["profiles_format"],
                 "errorMessage": "Provided profiles_format is not valid"
             },
