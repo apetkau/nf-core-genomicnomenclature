@@ -1,7 +1,7 @@
 process GENOMIC_ADDRESS_SERVICE_MCLUSTER {
     label 'process_single'
 
-    container 'genomic_address_service:latest'
+    container 'docker.io/apetkau/genomic_address_service:latest'
 
     input:
     path(distance_matrix)
