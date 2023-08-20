@@ -10,6 +10,7 @@ process GENOMIC_ADDRESS_SERVICE_MCLUSTER {
 
     output:
     tuple val(meta), path("*_results/clusters.text")  , emit: clusters_text
+    tuple val(meta), path("*_results/distances.text") , emit: distances_text
     tuple val(meta), path("*_results/run.json")       , emit: run_json
     tuple val(meta), path("*_results/thresholds.json"), emit: thresholds_json
     tuple val(meta), path("*_results/tree.nwk")       , emit: nwk
