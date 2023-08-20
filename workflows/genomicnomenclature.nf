@@ -35,7 +35,9 @@ ch_multiqc_custom_methods_description = params.multiqc_methods_description ? fil
 //
 // SUBWORKFLOW: Consisting of a mix of local and nf-core/modules
 //
-include { INPUT_CHECK } from '../subworkflows/local/input_check'
+include { INPUT_CHECK                      } from '../subworkflows/local/input_check'
+include { PROFILE_DISTS                    } from '../modules/local/profile_dists/main'
+include { GENOMIC_ADDRESS_SERVICE_MCLUSTER } from '../modules/local/genomic_address_service/mcluster/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -81,6 +83,18 @@ workflow GENOMICNOMENCLATURE {
         INPUT_CHECK.out.reads
     )
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+
+    PROFILE_DISTS (
+        file(params.samples_profile)
+    )
+    ch_versions = ch_versions.mix(PROFILE_DISTS.out.versions.first())
+
+    GENOMIC_ADDRESS_SERVICE_MCLUSTER (
+        PROFILE_DISTS.out.results_text,
+        thresholds="10,5,0",
+        method="average"
+    )
+    ch_versions = ch_versions.mix(GENOMIC_ADDRESS_SERVICE_MCLUSTER.out.versions.first())
 
     CUSTOM_DUMPSOFTWAREVERSIONS (
         ch_versions.unique().collectFile(name: 'collated_versions.yml')
