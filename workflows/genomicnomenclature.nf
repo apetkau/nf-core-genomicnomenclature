@@ -80,13 +80,13 @@ workflow GENOMICNOMENCLATURE {
         query_profile=file(params.samples_profile),
         reference_profile=file(params.samples_profile)
     )
-    ch_versions = ch_versions.mix(PROFILE_DISTS.out.versions.first())
+    ch_versions = ch_versions.mix(PROFILE_DISTS.out.versions)
 
     GENOMIC_ADDRESS_SERVICE_MCLUSTER (
         PROFILE_DISTS.out.results_text,
         thresholds="${params.mcluster_thresholds}",
     )
-    ch_versions = ch_versions.mix(GENOMIC_ADDRESS_SERVICE_MCLUSTER.out.versions.first())
+    ch_versions = ch_versions.mix(GENOMIC_ADDRESS_SERVICE_MCLUSTER.out.versions)
 
     CUSTOM_DUMPSOFTWAREVERSIONS (
         ch_versions.unique().collectFile(name: 'collated_versions.yml')
