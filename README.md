@@ -19,6 +19,7 @@ Here, the `profilesheet.csv` lists the cg/wgMLST profiles to cluster/generate no
 **profilesheet.csv**:
 
 | id | profiles_format | allele_profiles |
+|---|---|---|
 | test | tsv | allele_profiles.tsv |
 
 Output for genomic address mcluster will be in `results/genomic/{id}_results`, which contains the output of `gas mcluster` as described at <https://github.com/phac-nml/genomic_address_service>.
