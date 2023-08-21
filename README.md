@@ -2,6 +2,8 @@
 
 This pipeline is an example for genomic nomenclature (using <https://github.com/phac-nml/genomic_address_service>).
 
+A write-up of this pipeline is at <https://github.com/phac-nml/nf-pipelines/issues/1>.
+
 If you have Nextflow and Docker installed, you can test it out with:
 
 ```bash
